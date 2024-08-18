@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EmployeeManagement.Api\EmployeeManagement.Api.csproj" />
     <ProjectReference Include="..\EmployeeManagement.Model\EmployeeManagement.Model.csproj" />
   </ItemGroup>
 
