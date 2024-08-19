@@ -27,12 +27,14 @@ namespace EmployeeManagement.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<AppDbContext>(option =>
-            option.UseSqlServer(Configuration.GetConnectionString("DBConnection"))
-            );
+       
+     
+
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
