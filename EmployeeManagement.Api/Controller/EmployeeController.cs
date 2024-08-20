@@ -101,7 +101,7 @@ namespace EmployeeManagement.Api.Controller
 
                     var emp = employeeRepository.GetEmployeeByEmail(employee.Email);
 
-                    if(emp == null)
+                    if(emp != null)
                     {
 
                         ModelState.AddModelError("email", "Email Is Exist in");
@@ -130,15 +130,93 @@ namespace EmployeeManagement.Api.Controller
 
 
 
-        [HttpGet]
-        public async Task<ActionResult<Employee>> GetEmployeeByEmail(string email)
+        //[HttpGet]
+        //public async Task<ActionResult<Employee>> GetEmployeeByEmail(string email)
+        //{
+
+        //    return await employeeRepository.GetEmployeeByEmail(email);
+
+
+        //}
+
+
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Employee>> UpdateEmployee(int id, Employee emp)
         {
 
-            return await employeeRepository.GetEmployeeByEmail(email);
+            try
+            {
+
+            
+            if(id != emp.EmployeeId)
+            {
+                return BadRequest("Employee id Not Matched");
+            }
+
+            var employeeupdate=employeeRepository.GetEmployee(id);
+            if(employeeupdate == null)
+            {
+                return NotFound($"Employee id {id} Not Found");
+            }
+
+            return await employeeRepository.UpdateEmployee(emp);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError,"Error Update Data");
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Employee>> DeleteEmployee(int id) 
+        {
+
+            try
+            {
+                var deleteemployee = employeeRepository.GetEmployee(id);
+                if(deleteemployee == null)
+                {
+                    return NotFound($"Employee Id {id} Not Found");
+                }
+
+                return await employeeRepository.DeleteEmployee(id);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Deleting Data");
+
+            }
 
 
         }
 
 
+        [HttpGet("{search}")]
+        public async Task<ActionResult<Employee>> Search(string name, Gender? gender)
+        {
+
+            try
+            {
+                var result = await employeeRepository.Search(name, gender);
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Search Data");
+            }
+
+
+        }
     }
 }
