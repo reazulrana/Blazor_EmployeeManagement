@@ -15,14 +15,14 @@ namespace EmployeeManagement.Api.Model
         {
             this.appDbContext = appDbContext;
         }
-        public Department GetDepartment(int id)
+        public async Task<Department> GetDepartment(int id)
         {
-            return appDbContext.Departments.FirstOrDefault(x => x.DepartmentId == id);
+            return await appDbContext.Departments.FirstOrDefaultAsync(x => x.DepartmentId == id);
         }
 
-        public IEnumerable<Department> GetDepartments()
+        public async Task<IEnumerable<Department>> GetDepartments()
         {
-            return appDbContext.Departments;
+            return await appDbContext.Departments.ToListAsync();
         }
     }
 }

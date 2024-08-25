@@ -10,6 +10,8 @@ namespace EmployeeManagement.Web.Pages
     {
         [Inject]
         public IEmployeeService EmployeeService {get;set;}
+        public bool showfooter {get;set;}
+
 
         public List<Employee> Employees { get; set; }
 
@@ -23,6 +25,28 @@ namespace EmployeeManagement.Web.Pages
 
 
 
+        }
+
+        public int SelectedEmployeeCout { get; set; }
+
+        protected void EmployeeSelectionChanged(bool IsSelected)
+        {
+            if (IsSelected == true)
+            {
+                SelectedEmployeeCout++;
+            }
+            else
+            {
+                SelectedEmployeeCout--;
+
+            }
+        }
+
+
+        public string changedtext { get;set;}
+        public void UpdateText(string text)
+        {
+            changedtext=text;
         }
 
         //private void LoadEmployees()

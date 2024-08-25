@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Web.Services
 {
-    public interface IEmployeeService
+    public interface IDepartmentService
     {
-
-        Task<List<Employee>> GetEmployees();
-        Task<Employee> GetEmployee(int id);
+        Task<IEnumerable<Department>> GetDepartments();
+        Task<Department> GetDepartment(int id);
     }
 }

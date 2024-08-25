@@ -14,6 +14,18 @@ namespace EmployeeManagement.Web.Services
         {
             this.httpClient = httpClient;
         }
+
+        public async Task<Employee> GetEmployee(int id)
+        {
+
+            string url = $"api/employee/{id}";
+
+            var e = await httpClient.GetFromJsonAsync<Employee>(url);
+            
+            return e;
+
+        }
+
         public async Task<List<Employee>> GetEmployees()
         {
             return await httpClient.GetFromJsonAsync<List<Employee>>("api/employee");

@@ -40,12 +40,16 @@ namespace EmployeeManagement.Api.Model
 
         public async Task<Employee> GetEmployee(int employeeId)
         {
-           return await appDbContext.Employees.FirstOrDefaultAsync(x => x.EmployeeId == employeeId);
+           return await appDbContext.Employees
+                .Include(x=>x.Department)
+                .FirstOrDefaultAsync(x => x.EmployeeId == employeeId);
         }
 
         public async Task<Employee> GetEmployeeByEmail(string email)
         {
-            return await appDbContext.Employees.FirstOrDefaultAsync(x => x.Email == email);
+            return await appDbContext.Employees
+                
+                .FirstOrDefaultAsync(x => x.Email == email);
         }
 
         public async Task<IEnumerable<Employee>> GetEmployees()

@@ -2,7 +2,9 @@
 @inherits EmployeeListBase
 
 
-<h3>Employee List</h3>
+<h3>Selected Employee Count- @SelectedEmployeeCout </h3>
+<h3>Employee List </h3>
+<h3>Text Changed By - @changedtext </h3>
 
 @if (Employees == null)
 {
@@ -14,22 +16,16 @@ else
 
 <div class="card-deck">
     <div class="row">
+        <div class="col-md-12">
+
+            <input type="checkbox"  @bind="showfooter"/>
+
+        </div>
+
+
         @foreach (var e in Employees)
         {
-                <div class="card" style="max-width:18rem; max-width:30.5%">
-
-                    <div class="card-header">
-                        @e.FirstName @e.LastName
-                    </div>
-                    <div class="card-body">
-                    <img class="card-img-top imagethumbnail" src="@e.PhotoPath" />
-                    </div>
-                    <div class="card-footer text-center">
-                        <a href="#" class="btn btn-primary btn-sm m-1">View</a>
-                    <a href="#" class="btn btn-info btn-sm m-1">Edit</a>
-                    <a href="#" class="btn btn-danger btn-sm m-1">Delete</a>
-                    </div>
-                </div>
+                <DisplayEmployee TextChanged="UpdateText" Employee="e" ShowFooter="showfooter" OnEmployeeSelection="EmployeeSelectionChanged"></DisplayEmployee>
 
         }
     </div>

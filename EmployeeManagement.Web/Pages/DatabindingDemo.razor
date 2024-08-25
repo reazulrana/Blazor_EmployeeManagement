@@ -1,0 +1,36 @@
+﻿@page "/databindingdemo"
+@inherits DatabindingDemoBase
+
+
+<div>
+    <b>Name:</b> @Name
+</div>
+
+
+<div>
+    <b>Gender:</b> @Gender
+</div>
+<div>
+
+    <b>Name With Salution: @(Gender.ToLower() == "male" ? $"Mr.  { Name }" :$"Ms.{ Name }") </b>
+
+</div>
+<div>
+    <input @bind="Name" @bind:event="oninput" />
+</div>
+
+<div>
+    <select @bind="Gender">
+    <option>
+        Male
+    </option>    
+        <option>
+            Female
+        </option>
+    </select>
+</div>
+
+<input @bind="bgcolor" />
+<div @bind-style="bgcolor" @bind-style:event="onchange">
+    <p>Background Color is: @bgcolor</p>
+</div>
