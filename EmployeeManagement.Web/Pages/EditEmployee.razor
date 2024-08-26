@@ -32,4 +32,35 @@
             <InputText class="form-control" placeholder="Enter Email" id="email" @bind-Value="Employee.Email" />
         </div>
     </div>
+
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">
+            Department
+        </label>
+        <div class="col-md-10">
+            <InputSelect class="form-control" @bind-Value="Employee.DepartmentId" id="department">
+                @foreach(var d in Departments)
+                {
+                    <option value="@d.DepartmentId">@d.DepartmentName</option>
+                }
+
+        </InputSelect>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">
+            Gender
+        </label>
+        <div class="col-md-10">
+            <InputSelect class="form-control" @bind-Value="Employee.Gender" id="gender">
+                @foreach (var gender in Enum.GetValues(typeof(Gender)))
+                {
+                <option value="@gender">@gender</option>
+                }
+
+            </InputSelect>
+        </div>
+    </div>
 </EditForm>
