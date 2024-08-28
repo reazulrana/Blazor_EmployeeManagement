@@ -1,4 +1,5 @@
 using EmployeeManagement.Api.Model;
+using EmployeeManagement.Web.Model;
 using EmployeeManagement.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -28,7 +29,8 @@ namespace EmployeeManagement.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-       
+
+            services.AddAutoMapper(typeof(EmployeeProfile));
      
 
 

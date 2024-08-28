@@ -141,22 +141,22 @@ namespace EmployeeManagement.Api.Controller
 
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Employee>> UpdateEmployee(int id, Employee emp)
+        public async Task<ActionResult<Employee>> UpdateEmployee(Employee emp)
         {
 
             try
             {
 
             
-            if(id != emp.EmployeeId)
-            {
-                return BadRequest("Employee id Not Matched");
-            }
+            //if(id != emp.EmployeeId)
+            //{
+            //    return BadRequest("Employee id Not Matched");
+            //}
 
-            var employeeupdate=employeeRepository.GetEmployee(id);
+            var employeeupdate=employeeRepository.GetEmployee(emp.EmployeeId);
             if(employeeupdate == null)
             {
-                return NotFound($"Employee id {id} Not Found");
+                return NotFound($"Employee id {emp.EmployeeId} Not Found");
             }
 
             return await employeeRepository.UpdateEmployee(emp);

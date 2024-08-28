@@ -3,15 +3,18 @@
 
 <h3>Edit Employee</h3>
 
-<EditForm Model="@Employee">
-
+<EditForm Model="@EditEmployee" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator/>
+    <hr />
+    <ValidationSummary/>
     <h3>Edit Form</h3>
     <div class="form-group row">
         <label class="col-md-2 col-form-label">
             First Name
         </label>
         <div class="col-md-10">
-            <InputText class="form-control"  placeholder="Enter Firsr Name"  id="firstName" @bind-Value="Employee.FirstName" />
+            <InputText class="form-control" placeholder="Enter Firsr Name" id="firstName" @bind-Value="EditEmployee.FirstName" />
+            <ValidationMessage For="@(()=>EditEmployee.FirstName)" />
         </div>
     </div>
 
@@ -20,7 +23,8 @@
             Last Name
         </label>
         <div class="col-md-10">
-            <InputText class="form-control" placeholder="Enter Last Name" id="lastName" @bind-Value="Employee.LastName" />
+            <InputText class="form-control" placeholder="Enter Last Name" id="lastName" @bind-Value="EditEmployee.LastName" />
+            <ValidationMessage For="@(()=>EditEmployee.LastName)" />
         </div>
     </div>
 
@@ -29,9 +33,23 @@
             Empil
         </label>
         <div class="col-md-10">
-            <InputText class="form-control" placeholder="Enter Email" id="email" @bind-Value="Employee.Email" />
+            <InputText class="form-control" placeholder="Enter Email" id="email" @bind-Value="EditEmployee.Email" />
+            <ValidationMessage For="@(()=>EditEmployee.Email)" />
+
         </div>
     </div>
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">
+            Confirm Email
+        </label>
+        <div class="col-md-10">
+            <InputText class="form-control" placeholder="Enter Email" id="email" @bind-Value="EditEmployee.ConfirmEmail" />
+            <ValidationMessage For="@(()=>EditEmployee.ConfirmEmail)" />
+
+        </div>
+    </div>
+
 
 
     <div class="form-group row">
@@ -39,7 +57,7 @@
             Department
         </label>
         <div class="col-md-10">
-            <InputSelect class="form-control" @bind-Value="Employee.DepartmentId" id="department">
+            <InputSelect class="form-control" @bind-Value="EditEmployee.DepartmentId" id="department">
                 @foreach(var d in Departments)
                 {
                     <option value="@d.DepartmentId">@d.DepartmentName</option>
@@ -54,7 +72,7 @@
             Gender
         </label>
         <div class="col-md-10">
-            <InputSelect class="form-control" @bind-Value="Employee.Gender" id="gender">
+            <InputSelect class="form-control" @bind-Value="EditEmployee.Gender" id="gender">
                 @foreach (var gender in Enum.GetValues(typeof(Gender)))
                 {
                 <option value="@gender">@gender</option>
@@ -62,5 +80,20 @@
 
             </InputSelect>
         </div>
+    </div>
+
+
+
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">
+            Date Of Birth
+        </label>
+        <div class="col-md-10">
+            <InputDate class="form-control" placeholder="Enter date" id="dateofbirth" @bind-Value="EditEmployee.DateofBirth" />
+
+        </div>
+    </div>
+    <div class="form-group row">
+    <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </EditForm>
